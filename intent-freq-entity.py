@@ -22,7 +22,7 @@ st.markdown("""
 <b>Directions: </b></ br><ol>
 <li>Upload CSV of GSC query export</li>
 <li>Custom intent could be brand or other query category or leave blank</li>
-<li>Sign up for Google Knowledge Graph <a href='https://developers.google.com/knowledge-graph/how-tos/authorizing'>API Key here</a></li>
+<li>Sign up for Google Knowledge Graph <a href='https://developers.google.com/knowledge-graph/how-tos/authorizing'>API Key here</a> (100k free per day)</li>
 </ol>
 """, unsafe_allow_html=True)
 
