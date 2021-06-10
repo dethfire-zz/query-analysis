@@ -8,8 +8,6 @@ from collections import Counter
 import streamlit as st
 import base64
 
-
-
 st.markdown("""
 <style>
 .big-font {
@@ -19,7 +17,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<p class="big-font">Query Intent, Keyword Frequency and Entity Labeler</p>
+<p class="big-font">GSC Query Analysis Tool</p>
+<p><b>Label Intent, Enitites and Count Keyword Frequency</b></p>
 <b>Directions: </b></ br><ol>
 <li>Upload CSV of GSC query export</li>
 <li>Custom intent could be brand or other query category or leave blank</li>
