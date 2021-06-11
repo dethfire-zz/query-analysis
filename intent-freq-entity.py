@@ -21,14 +21,14 @@ st.markdown("""
 <p><b>Label Intent, Enitites and Count Keyword Frequency</b></p>
 <b>Directions: </b></ br><ol>
 <li>Upload CSV of GSC query export</li>
-<li>Custom intent could be brand or other query category or leave blank</li>
+<li>Custom intent could be brand or other query type category or leave blank</li>
 <li>Sign up for Google Knowledge Graph <a href='https://developers.google.com/knowledge-graph/how-tos/authorizing'>API Key here</a> (100k free per day)</li>
 </ol>
 """, unsafe_allow_html=True)
 
 with st.form("user-details"):
     get_queries = st.file_uploader("Upload CSV of GSC query export",type=['csv'])
-    custom_list = st.text_input('Custom Intent Words comma delineated (ex Brand words)','google')
+    custom_list = st.text_input('Custom Intent Words comma delineated (ex Brand variation words)','google,')
     kgkey = st.text_input('Enter Google Knowledge Graph API Key (leave blank if none)','')
     submitted = st.form_submit_button("Process")
     
