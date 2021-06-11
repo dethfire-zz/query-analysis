@@ -65,6 +65,7 @@ with st.form("user-details"):
         st.write("Custom: " + str(custom_count) + " | " + str(round((custom_count/total_queries)*100,1)) + "%")
 
         df_intents = pd.concat([info_filter,trans_filter,comm_filter,custom_filter]).sort_values('Clicks', ascending=False)
+        df_intents = df_intents.drop_duplicates(subset='Top queries', keep="first")
         
         df_intents = df_intents[ ['Top queries'] + ['Clicks'] + ['Impressions'] + ['Intent'] + ['CTR'] + ['Position'] ]
         
