@@ -18,7 +18,7 @@ st.markdown("""
 
 st.markdown("""
 <p class="big-font">GSC Query Analysis Tool</p>
-<p><b>Label Intent, Enitites and Count Keyword Frequency</b></p>
+<p><b>Label Intent, Entities and Count Keyword Frequency</b></p>
 <b>Directions: </b></ br><ol>
 <li>Upload CSV of GSC query export</li>
 <li>Custom intent could be brand or other query type category or leave blank</li>
