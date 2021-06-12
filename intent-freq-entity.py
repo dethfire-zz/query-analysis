@@ -113,6 +113,8 @@ with st.form("user-details"):
                 labels += item + ","
               return labels
 
+            master_labels = []
+
             for key, value in counts:
               percent = round((value/total_tokens)*100,1)
             
