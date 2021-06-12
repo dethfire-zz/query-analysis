@@ -116,10 +116,9 @@ with st.form("user-details"):
             for key, value in counts:
               percent = round((value/total_tokens)*100,1)
             
-              kg_label = kg(key)
+              kg_label = kg(key,kgkey)
               master_labels.extend(kg_label.rstrip(kg_label[-1]).split(","))
             
-              kg_label = kg(key,kgkey)
               data = {'Keyword': key, 'Count': value, 'Percent': percent, 'Entity Labels': kg_label}
               df2 = df2.append(data, ignore_index=True)
               
