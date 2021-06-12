@@ -56,13 +56,6 @@ with st.form("user-details"):
         trans_count = len(trans_filter)
         comm_count = len(comm_filter)
         custom_count = len(custom_filter)
-        
-        st.title("Query Intent Stats")
-        st.write("Total Queries: " + str(total_queries))
-        st.write("Infomational: " + str(info_count) + " | " + str(round((info_count/total_queries)*100,1)) + "%")
-        st.write("Transactional: " + str(trans_count) + " | " + str(round((trans_count/total_queries)*100,1)) + "%")
-        st.write("Commercial: " + str(comm_count) + " | " + str(round((comm_count/total_queries)*100,1)) + "%")
-        st.write("Custom: " + str(custom_count) + " | " + str(round((custom_count/total_queries)*100,1)) + "%")
 
         df_intents = pd.concat([info_filter,trans_filter,comm_filter,custom_filter]).sort_values('Clicks', ascending=False)
         df_intents = df_intents.drop_duplicates(subset='Top queries', keep="first")
@@ -70,6 +63,12 @@ with st.form("user-details"):
         df_intents = df_intents[ ['Top queries'] + ['Clicks'] + ['Impressions'] + ['Intent'] + ['CTR'] + ['Position'] ]
         
         st.title("Query Intent Table")
+        
+        st.write("Total Queries: " + str(total_queries))
+        st.write("Infomational: " + str(info_count) + " | " + str(round((info_count/total_queries)*100,1)) + "%")
+        st.write("Transactional: " + str(trans_count) + " | " + str(round((trans_count/total_queries)*100,1)) + "%")
+        st.write("Commercial: " + str(comm_count) + " | " + str(round((comm_count/total_queries)*100,1)) + "%")
+        st.write("Custom: " + str(custom_count) + " | " + str(round((custom_count/total_queries)*100,1)) + "%")
         
         def get_csv_download_link(df, title):
             csv = df.to_csv(index=False)
@@ -116,11 +115,20 @@ with st.form("user-details"):
 
             for key, value in counts:
               percent = round((value/total_tokens)*100,1)
+            
+              kg_label = kg(key)
+              master_labels.extend(kg_label.rstrip(kg_label[-1]).split(","))
+            
               kg_label = kg(key,kgkey)
               data = {'Keyword': key, 'Count': value, 'Percent': percent, 'Entity Labels': kg_label}
               df2 = df2.append(data, ignore_index=True)
               
             st.title("Query Keyword Frequency and Entities")
+            
+            entity_counts = Counter(master_labels).most_common(5)
+
+            for key, value in entity_counts:
+                st.write(key + ": " + str(value))
  
             st.markdown(get_csv_download_link(df2,"freq-entity.csv"), unsafe_allow_html=True)
             
