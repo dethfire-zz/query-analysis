@@ -91,7 +91,7 @@ with st.form("user-details"):
             query_tokens = [x[0] for x in query_tokens]
             total_tokens = len(query_tokens)
 
-            counts = Counter(query_tokens).most_common(25)
+            counts = Counter(query_tokens).most_common(50)
             df2 = pd.DataFrame(columns = ['Keyword', 'Count', 'Percent','Entity Labels'])
 
             def kg(keyword,apikey):
@@ -120,6 +120,7 @@ with st.form("user-details"):
             
               kg_label = kg(key,kgkey)
               master_labels.extend(kg_label.rstrip(kg_label[-1]).split(","))
+              total_entities = len(master_labels)
             
               data = {'Keyword': key, 'Count': value, 'Percent': percent, 'Entity Labels': kg_label}
               df2 = df2.append(data, ignore_index=True)
@@ -127,9 +128,10 @@ with st.form("user-details"):
             st.title("Query Keyword Frequency and Entities")
             
             entity_counts = Counter(master_labels).most_common(5)
-
+            
+            st.write("Total Entities: " + str(total_entities))
             for key, value in entity_counts:
-                st.write(key + ": " + str(value))
+                st.write(key + ": " + str(value) + " | " + str(round((value/total_entities)*100,1)) + "%")
  
             st.markdown(get_csv_download_link(df2,"freq-entity.csv"), unsafe_allow_html=True)
             
